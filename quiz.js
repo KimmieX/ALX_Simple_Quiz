@@ -1,24 +1,22 @@
 function checkAnswer() {
-    // Correct answer
     const correctAnswer = "4";
 
-    // Retrieve the user's answer
-    const userAnswer = document.querySelector('input[name="quiz"]:checked');
+    // Select the checked input element
+    const selectedRadio = document.querySelector('input[name="quiz"]:checked');
 
-    // Check if an answer was selected
-    if (userAnswer) {
-        const userAnswerValue = userAnswer.value;
+    let userAnswer = null;
+    if (selectedRadio !== null) {
+        userAnswer = selectedRadio.value;
+    }
 
-        // Compare user's answer with the correct answer
-        if (userAnswerValue === correctAnswer) {
-            document.getElementById("feedback").textContent = "Correct! Well done.";
-        } else {
-            document.getElementById("feedback").textContent = "That's incorrect. Try again!";
-        }
-    } else {
+    if (userAnswer === null) {
         document.getElementById("feedback").textContent = "Please select an answer.";
+    } else if (userAnswer === correctAnswer) {  // <-- This line explicitly compares strings
+        document.getElementById("feedback").textContent = "Correct! Well done.";
+    } else {
+        document.getElementById("feedback").textContent = "That's incorrect. Try again!";
     }
 }
 
-// Add event listener to the submit button
 document.getElementById("submit-answer").addEventListener("click", checkAnswer);
+
